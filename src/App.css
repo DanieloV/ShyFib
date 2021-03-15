@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+.cell {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.cell--yellow {
+  background-color: yellow;
+}
+
+.cell--green {
+  background-color: green;
+}
+
+.cell:hover {
+  background-color: lightgrey;
+}
