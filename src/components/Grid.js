@@ -11,16 +11,24 @@ function Grid() {
   }
 
   // Checks if an element can be part of a fib seq with its neighbours on a single axis
+  //  0: No,
+  // -1: Part of a decresing sequence,
+  //  1: Part of an increasing sequence
   const checkElem = (grid, row, col, rowModSigned, colModSigned) => {
     let valid = true;
     const rowMod = Math.abs(rowModSigned);
     const colMod = Math.abs(colModSigned);
     [row - rowMod, row + rowMod, col - colMod, col + colMod].forEach(
-      (x) => {
-        if (!isPosValid(x)) valid = false
-      }
-    )
+      (x) => { if (!isPosValid(x)) valid = false }
+    );
     if (!valid) return 0;
+
+    // Not considering 0 as valid seq element
+    [grid[row][col], grid[row + rowMod][col + colMod], grid[row - rowMod][col - colMod]].forEach(
+      (x) => { if (x == 0) valid = false }
+    );
+    if (!valid) return 0;
+
 
     if (grid[row][col] + grid[row + rowMod][col + colMod] === grid[row - rowMod][col - colMod])
       return -1
